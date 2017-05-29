@@ -5,7 +5,7 @@ import { srcVueTemplateHtml } from "./variables";
 
 @Component({
     template: srcVueTemplateHtml,
-    props: ["data", "timeout", "interval", "count", "width"],
+    props: ["data", "timeout", "interval", "count", "width", "height"],
 })
 class Carousel extends Vue {
     data: common.CarouselData[];
@@ -13,6 +13,7 @@ class Carousel extends Vue {
     interval: number;
     count: number;
     width: number;
+    height: number;
 
     timer: NodeJS.Timer;
     currentIndex = 0;
@@ -43,16 +44,23 @@ class Carousel extends Vue {
     get containerStyle() {
         return {
             width: `${this.width * this.currentCount}px`,
+            height: `${this.height}px`,
+        };
+    }
+    get mainStyle() {
+        return {
+            width: `${this.width * this.currentCount}px`,
         };
     }
     get ulStyle() {
         return {
-            width: `${this.width * this.currentCount * 2}px`,
+            width: `${this.width * this.currentCount * 3}px`,
         };
     }
     get liStyle() {
         return {
             width: `${this.width}px`,
+            height: `${this.height}px`,
         };
     }
 
