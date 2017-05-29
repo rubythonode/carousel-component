@@ -7,7 +7,8 @@ import "../../dist/vue";
     <carousel :data="data"
         timeout="500"
         interval="3000"
-        count="5"></carousel>
+        count="5"
+        width="200"></carousel>
     `,
 })
 class App extends Vue {

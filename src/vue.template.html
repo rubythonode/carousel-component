@@ -1,9 +1,12 @@
-<div class="carousel">
-    <div class="main">
+<div class="carousel" :style="containerStyle">
+    <div class="main" :style="containerStyle">
         <ul ref="ul"
+            :style="ulStyle"
             @mouseenter="pause()"
             @mouseleave="start()">
-            <li v-for="(d, i) in data" v-if="i >= currentIndex && i < currentIndex + currentCount">{{d}}</li>
+            <li v-for="(d, i) in data"
+                v-if="i >= currentIndex && i < currentIndex + currentCount"
+                :style="liStyle">{{d}}</li>
         </ul>
     </div>
     <div class="left"

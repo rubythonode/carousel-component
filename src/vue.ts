@@ -5,20 +5,22 @@ import { srcVueTemplateHtml } from "./variables";
 
 @Component({
     template: srcVueTemplateHtml,
-    props: ["data", "timeout", "interval", "count"],
+    props: ["data", "timeout", "interval", "count", "width"],
 })
 class Carousel extends Vue {
     data: common.CarouselData[];
     timeout: number;
     interval: number;
     count: number;
+    width: number;
 
     timer: NodeJS.Timer;
     currentIndex = 0;
-    width = 200;
     hoveringLeft = false;
     hoveringRight = false;
     currentCount = 0;
+    lastWidth: number;
+    lastNum: number;
 
     beforeMount() {
         this.currentCount = +this.count;
@@ -38,8 +40,32 @@ class Carousel extends Vue {
         };
     }
 
+    get containerStyle() {
+        return {
+            width: `${this.width * this.currentCount}px`,
+        };
+    }
+    get ulStyle() {
+        return {
+            width: `${this.width * this.currentCount * 2}px`,
+        };
+    }
+    get liStyle() {
+        return {
+            width: `${this.width}px`,
+        };
+    }
+
+    setStyle(num: number, width: number) {
+        if (this.lastNum === num && this.lastWidth === width) {
+            return;
+        }
+        this.lastNum = num;
+        this.lastWidth = width;
+        common.setStyle(num, width);
+    }
     moveLeft(num: number) {
-        common.setStyle(num, 200);
+        this.setStyle(num, this.width);
         common.runAnimation(this.$refs.ul as HTMLElement, this.timeout, "move-left", num, () => {
             this.currentIndex -= num;
             if (this.currentIndex < 0) {
@@ -48,7 +74,7 @@ class Carousel extends Vue {
         });
     }
     moveRight(num: number) {
-        common.setStyle(num, 200);
+        this.setStyle(num, this.width);
         common.runAnimation(this.$refs.ul as HTMLElement, this.timeout, "move-right", num, () => {
             this.currentIndex += num;
             if (this.currentIndex >= this.data.length - this.currentCount) {

@@ -15,13 +15,13 @@ export function setStyle(num: number, width: number) {
         document.getElementsByTagName("head")[0].appendChild(style);
     }
     style.innerHTML = `@keyframes move-left {
-            0% { left: 0; }
-            100% { left: ${width * num}px; }
-        }
-        @keyframes move-right {
-            0% { left: 0; }
-            100% { left: -${width * num}px; }
-        }`;
+    0% { left: 0; }
+    100% { left: ${width * num}px; }
+}
+@keyframes move-right {
+    0% { left: 0; }
+    100% { left: -${width * num}px; }
+}`;
 }
 
 export function runAnimation(ul: HTMLElement, timeout: number, keyframes: string, num: number, next: () => void) {
