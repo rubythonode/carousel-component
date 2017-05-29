@@ -3,6 +3,17 @@ import Component from "vue-class-component";
 import "../../dist/vue";
 
 @Component({
+    template: `<span>{{data}}</span>`,
+    props: ["data"],
+})
+class CarouselItem extends Vue {
+    data: number;
+}
+Vue.component("carousel-item", CarouselItem);
+
+import { CarouselData } from "../../dist/common";
+
+@Component({
     template: `
     <carousel :data="data"
         timeout="500"
@@ -13,7 +24,17 @@ import "../../dist/vue";
     `,
 })
 class App extends Vue {
-    data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    data: CarouselData[] = [
+        { data: 1, component: "carousel-item" },
+        { data: 2, component: "carousel-item" },
+        { data: 3, component: "carousel-item" },
+        { data: 4, component: "carousel-item" },
+        { data: 5, component: "carousel-item" },
+        { data: 6, component: "carousel-item" },
+        { data: 7, component: "carousel-item" },
+        { data: 8, component: "carousel-item" },
+        { data: 9, component: "carousel-item" },
+    ];
 }
 
 /* tslint:disable:no-unused-expression */

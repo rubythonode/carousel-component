@@ -1,7 +1,8 @@
 export interface CarouselData {
     /* tslint:disable:ban-types */
-    component?: string | Function;
+    component: string | Function;
     /* tslint:enable:ban-types */
+    data: any;
 }
 
 const animationKeyframesIdName = "carousel-animation-keyframes";
