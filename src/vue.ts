@@ -26,11 +26,7 @@ class Carousel extends Vue {
     beforeMount() {
         this.actualCount = this.data.length < +this.count ? this.data.length : +this.count;
         this.currentIndex = this.actualCount;
-
-        const leftItems = this.data.slice(this.data.length - this.actualCount);
-        const rightItems = this.data.slice(0, this.actualCount);
-        this.data.unshift(...leftItems);
-        this.data.push(...rightItems);
+        common.appendLeftAndRightData(this.data, this.actualCount);
         this.start();
     }
 

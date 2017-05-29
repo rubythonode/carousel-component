@@ -36,3 +36,10 @@ export function runAnimation(ul: HTMLElement, timeout: number, keyframes: string
         });
     });
 }
+
+export function appendLeftAndRightData(data: CarouselData[], actualCount: number) {
+    const leftItems = data.slice(data.length - actualCount);
+    const rightItems = data.slice(0, actualCount);
+    data.unshift(...leftItems);
+    data.push(...rightItems);
+}

@@ -39,6 +39,26 @@ the online demo: https://plantain-00.github.io/carousel-component/demo/vue/index
 
 the source code of the demo: https://github.com/plantain-00/carousel-component/tree/master/demo/vue
 
+#### reactjs component demo
+
+```ts
+import { Carousel } from "carousel-component/dist/react";
+```
+
+```jsx
+<Carousel data={this.data}
+    timeout={500}
+    interval={3000}
+    count={5}
+    width={200}
+    height={150}>
+</Carousel>
+```
+
+the online demo: https://plantain-00.github.io/carousel-component/demo/react/index.html
+
+the source code of the demo: https://github.com/plantain-00/carousel-component/tree/master/demo/react
+
 #### properties and events of the component
 
 name | type | description

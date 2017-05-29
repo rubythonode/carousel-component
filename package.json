@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc -p src && tsc -p demo",
-    "tslint": "tslint \"src/**/*.ts\" \"src/**/*.tsx\"",
+    "tslint": "tslint \"src/**/*.ts\" \"src/**/*.tsx\" \"demo/**/*.ts\" \"demo/**/*.tsx\"",
     "rev-static": "rev-static --config demo/rev-static.config.js",
     "webpack": "webpack --config demo/webpack.config.js",
     "lessc": "lessc src/carousel.less > dist/carousel.css",

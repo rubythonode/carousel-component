@@ -4,6 +4,7 @@ const path = require("path");
 module.exports = {
     entry: {
         vue: "./demo/vue/index",
+        react: "./demo/react/index",
     },
     output: {
         path: __dirname,
@@ -16,14 +17,14 @@ module.exports = {
             }
         }),
         new webpack.NoEmitOnErrorsPlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false,
-            },
-            output: {
-                comments: false,
-            },
-        }),
+        // new webpack.optimize.UglifyJsPlugin({
+        //     compress: {
+        //         warnings: false,
+        //     },
+        //     output: {
+        //         comments: false,
+        //     },
+        // }),
     ],
     resolve: {
         alias: {
