@@ -19,13 +19,18 @@ class Carousel extends Vue {
     currentIndex = 0;
     hoveringLeft = false;
     hoveringRight = false;
-    currentCount = 0;
     lastWidth: number;
     lastNum: number;
+    actualCount = 0;
 
     beforeMount() {
-        this.currentCount = +this.count;
-        this.data.push(...this.data.slice(0, this.currentCount));
+        this.actualCount = this.data.length < +this.count ? this.data.length : +this.count;
+        this.currentIndex = this.actualCount;
+
+        const leftItems = this.data.slice(this.data.length - this.actualCount);
+        const rightItems = this.data.slice(0, this.actualCount);
+        this.data.unshift(...leftItems);
+        this.data.push(...rightItems);
         this.start();
     }
 
@@ -43,18 +48,19 @@ class Carousel extends Vue {
 
     get containerStyle() {
         return {
-            width: `${this.width * this.currentCount}px`,
+            width: `${this.width * this.actualCount}px`,
             height: `${this.height}px`,
         };
     }
     get mainStyle() {
         return {
-            width: `${this.width * this.currentCount}px`,
+            width: `${this.width * this.actualCount}px`,
         };
     }
     get ulStyle() {
         return {
-            width: `${this.width * this.currentCount * 3}px`,
+            width: `${this.width * this.actualCount * 3}px`,
+            left: `-${this.width * this.actualCount}px`,
         };
     }
     get liStyle() {
@@ -70,14 +76,14 @@ class Carousel extends Vue {
         }
         this.lastNum = num;
         this.lastWidth = width;
-        common.setStyle(num, width);
+        common.setStyle(num, width, this.actualCount);
     }
     moveLeft(num: number) {
         this.setStyle(num, this.width);
         common.runAnimation(this.$refs.ul as HTMLElement, this.timeout, "move-left", num, () => {
             this.currentIndex -= num;
-            if (this.currentIndex < 0) {
-                this.currentIndex = this.data.length - this.currentCount + this.currentIndex;
+            if (this.currentIndex < this.actualCount) {
+                this.currentIndex += this.data.length - this.actualCount * 2;
             }
         });
     }
@@ -85,8 +91,8 @@ class Carousel extends Vue {
         this.setStyle(num, this.width);
         common.runAnimation(this.$refs.ul as HTMLElement, this.timeout, "move-right", num, () => {
             this.currentIndex += num;
-            if (this.currentIndex >= this.data.length - this.currentCount) {
-                this.currentIndex -= (this.data.length - this.currentCount);
+            if (this.currentIndex >= this.data.length - this.actualCount) {
+                this.currentIndex -= this.data.length - this.actualCount * 2;
             }
         });
     }

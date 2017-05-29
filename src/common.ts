@@ -1,13 +1,13 @@
-export interface CarouselData {
+export type CarouselData = {
     /* tslint:disable:ban-types */
     component: string | Function;
     /* tslint:enable:ban-types */
     data: any;
-}
+};
 
 const animationKeyframesIdName = "carousel-animation-keyframes";
 
-export function setStyle(num: number, width: number) {
+export function setStyle(num: number, width: number, count: number) {
     let style = document.getElementById(animationKeyframesIdName) as HTMLStyleElement;
     if (!style) {
         style = document.createElement("style");
@@ -16,12 +16,12 @@ export function setStyle(num: number, width: number) {
         document.getElementsByTagName("head")[0].appendChild(style);
     }
     style.innerHTML = `@keyframes move-left {
-    0% { left: 0; }
-    100% { left: ${width * num}px; }
+    0% { left: ${-width * count}px; }
+    100% { left: ${width * num - width * count}px; }
 }
 @keyframes move-right {
-    0% { left: 0; }
-    100% { left: -${width * num}px; }
+    0% { left: ${-width * count}; }
+    100% { left: ${-width * num - width * count}px; }
 }`;
 }
 

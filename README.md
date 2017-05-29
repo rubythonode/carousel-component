@@ -26,7 +26,12 @@ import "carousel-component/dist/vue";
 ```
 
 ```html
-<carousel :data="data">
+<carousel :data="data"
+    timeout="500"
+    interval="3000"
+    count="5"
+    width="200"
+    height="150">
 </carousel>
 ```
 
@@ -39,13 +44,24 @@ the source code of the demo: https://github.com/plantain-00/carousel-component/t
 name | type | description
 --- | --- | ---
 data | [CarouselData](#carousel-data-structure)[] | the data of the carousel
+timeout | number | the animation time in milliseconds
+interval | number | the movement time in milliseconds
+count | number | the item count at most
+width | number | width of an item
+height | number | height of items
 
 #### carousel data structure
 
 ```ts
+type CarouselData = {
+    component: string | Function; // the item component, for vuejs, it is the component name, for reactjs, it is the class object
+    data: any; // the data will be passed to the component as `data` props
+};
 ```
 
 #### features
 
 + vuejs component
 + reactjs component
++ commonjs module
++ custom component

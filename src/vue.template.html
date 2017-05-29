@@ -5,7 +5,7 @@
             @mouseenter="pause()"
             @mouseleave="start()">
             <li v-for="(d, i) in data"
-                v-if="i >= currentIndex && i < currentIndex + currentCount"
+                v-if="i >= currentIndex - actualCount && i < currentIndex + actualCount * 2"
                 :style="liStyle">
                 <component :is="d.component" :data="d.data"></component>
             </li>
@@ -13,13 +13,13 @@
     </div>
     <div class="left"
         :style="leftStyle"
-        @click="moveLeft(currentCount)"
+        @click="moveLeft(actualCount)"
         @mouseenter="mouseenterLeft()"
         @mouseleave="mouseleaveLeft()">
     </div>
     <div class="right"
         :style="rightStyle"
-        @click="moveRight(currentCount)"
+        @click="moveRight(actualCount)"
         @mouseenter="mouseenterRight()"
         @mouseleave="mouseleaveRight()">
     </div>
