@@ -61,6 +61,6 @@ typings/
 # Custom
 .vscode
 dist
-demo/**/*.js
-demo/**/index.html
-!*.config.js
+*.config.js
+demo/**/index.js
+demo/*.bundle.js
